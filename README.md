@@ -24,8 +24,8 @@ It uses a H2 in memory database (for now), can be changed easily in the `applica
 # Getting started
 
 You need Java 8 installed and any latest version of Maven.
- Run : mvn spring-boot:run
- or RightClick Start OvenControlApplication.java to build and start the Application.
+ * Run : mvn spring-boot:run
+ * RightClick Start OvenControlApplication.java to build and start the Application.
 
 Once Application is build and started, It will be launched on port 8080 locally.
 
