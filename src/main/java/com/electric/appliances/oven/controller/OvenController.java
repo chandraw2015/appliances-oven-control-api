@@ -63,7 +63,7 @@ public class OvenController {
     public Oven stop(@PathVariable long ovenId){
 
        Oven oven = ovenService.getOvenById(ovenId);
-       if(Utils.isOvenStarted(oven) && Utils.getOvenState(oven).equals(OvenState.PROCESS.toString())){
+       if(Utils.isOvenStarted(oven) || Utils.getOvenState(oven).equals(OvenState.PROCESS.toString())){
            oven.setOvenState(OvenState.STOPPED);
            return ovenService.updateOvenStatus(oven);
        }
