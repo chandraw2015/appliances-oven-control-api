@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "d655b2a4-0b4a-4be4-a0b6-739c6bc6bea6",
+		"name": "Oven-Control-API",
+		"description": "This collection file consist API which can be used to control an Oven.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start-Oven",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "To start the Oven if not already."
+			},
+			"response": []
+		},
+		{
+			"name": "GetAll-Programs-WithOvenID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0a614ac-508b-46a4-aa04-8cd542bf9681",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"programId\", jsonData.programs[1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Oven_Base_Url}}/oven/{{ovenId}}/programs",
+					"host": [
+						"{{Oven_Base_Url}}"
+					],
+					"path": [
+						"oven",
+						"{{ovenId}}",
+						"programs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Oven-CurrentState",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Get the state of Oven"
+			},
+			"response": []
+		},
+		{
+			"name": "Program-Oven",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "This Api is used to set a Oven Program"
+			},
+			"response": []
+		},
+		{
+			"name": "Stop-Oven",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "This Api is used to Stop the Oven"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

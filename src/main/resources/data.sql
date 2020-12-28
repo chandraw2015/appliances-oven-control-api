@@ -1,11 +1,11 @@
-CREATE TABLE billionaires (
-                              id INT AUTO_INCREMENT  PRIMARY KEY,
-                              first_name VARCHAR(250) NOT NULL,
-                              last_name VARCHAR(250) NOT NULL,
-                              career VARCHAR(250) DEFAULT NULL
-);
 
-INSERT INTO billionaires (first_name, last_name, career) VALUES
-('Aliko', 'Dangote', 'Billionaire Industrialist'),
-('Bill', 'Gates', 'Billionaire Tech Entrepreneur'),
-('Folrunsho', 'Alakija', 'Billionaire Oil Magnate');
+INSERT INTO oven (id, name, model, version , ovenState) VALUES
+(1,'Murphy', 'TN-202', '2.0.5' , 'STOPPED');
+
+
+
+INSERT INTO program (id, name, temperature, time , oven_id) VALUES
+(1,'Recipe1', '350', '6000' , '1');
+INSERT INTO program (id, name, temperature, time , oven_id) VALUES
+(2,'Recipe2', '420', '5000' , '1');
+
