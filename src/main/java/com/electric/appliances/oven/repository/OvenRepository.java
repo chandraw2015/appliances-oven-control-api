@@ -14,4 +14,5 @@ public interface OvenRepository extends CrudRepository<Oven, Long> {
     List<Oven> findAll();
     Oven save(Oven oven);
     Optional<Oven> findOvenById(long id);
+
 }
