@@ -1,6 +1,6 @@
 # appliances-oven-control-api
 
-This codebase was created to demonstrate a basic function controls of an Oven.
+This codebase was created to demonstrate basic function controls of an Oven.
 
 # How it works
 
