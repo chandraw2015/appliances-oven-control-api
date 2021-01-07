@@ -1,4 +1,4 @@
-package com.electric.appliances.oven.exceptions.exception;
+package com.electric.appliances.oven.exceptions;
 
 public class OvenNotFoundException extends RuntimeException{
     public OvenNotFoundException(String message){

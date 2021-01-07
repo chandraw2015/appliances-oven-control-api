@@ -24,39 +24,5 @@ public class OvenRepositoryTest {
     private OvenRepository ovenRepository;
 
 
-    @Test
-    public void getOven_whenFindAll(){
-
-        List<Oven> oven =ovenRepository.findAll();
-
-        Assertions.assertNotNull(oven);
-
-
-    }
-
-    @Test
-    public void test_saveOven(){
-        Oven oven = new Oven();
-        oven.setOvenState(OvenState.STARTED);
-        oven.setId(1);
-        oven.setName("LG");
-        oven.setModel("LG-2020");
-        oven.setVersion("1.0.2");
-        Oven savedOven= ovenRepository.save(oven);
-
-        Assertions.assertNotNull(savedOven);
-        Assertions.assertEquals("LG" , savedOven.getName());
-        Assertions.assertEquals("STARTED" , savedOven.getOvenState().toString());
-        Assertions.assertEquals("1.0.2", savedOven.getVersion());
-        Assertions.assertNotNull(savedOven.getId());
-    }
-     @Test
-     public void test_findOvenByID(){
-
-        long id = 1;
-        Optional<Oven> oven = ovenRepository.findOvenById(id);
-        Assertions.assertNotNull(oven.get());
-     }
-
 
 }

@@ -11,8 +11,11 @@ import java.util.Optional;
 @Repository
 public interface OvenRepository extends CrudRepository<Oven, Long> {
 
-    List<Oven> findAll();
+
+
+    Optional<Oven> findOvenByVersionAndAndModel(String version , String Model);
+
     Oven save(Oven oven);
-    Optional<Oven> findOvenById(long id);
+
 
 }

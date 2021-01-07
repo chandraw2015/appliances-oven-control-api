@@ -8,6 +8,9 @@ public class OvenControlApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OvenControlApplication.class, args);
+
+
+
 	}
 
 }

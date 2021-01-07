@@ -1,55 +1,34 @@
 package com.electric.appliances.oven.models;
 
-import javax.persistence.*;
-import javax.sound.midi.Sequence;
+import com.electric.appliances.oven.utils.OvenState;
 
-@Entity
+import javax.persistence.*;
+
+
+@Embeddable
 public class Program {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+   private OvenState ovenState = OvenState.STOPPED;
 
-    private String name;
+    private Long temperature;
 
-    private long time;
-
-    private long temperature;
-
-
-
-    public long getId() {
-        return id;
+    public OvenState getOvenState() {
+        return ovenState;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setOvenState(OvenState ovenState) {
+        this.ovenState = ovenState;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public long getTemperature() {
+    public Long getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(long temperature) {
+    public void setTemperature(Long temperature) {
         this.temperature = temperature;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Oven oven;
+
+
+
 }

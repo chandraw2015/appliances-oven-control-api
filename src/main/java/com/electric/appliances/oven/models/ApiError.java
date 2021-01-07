@@ -1,4 +1,4 @@
-package com.electric.appliances.oven.exceptions;
+package com.electric.appliances.oven.models;
 
 import java.util.Date;
 

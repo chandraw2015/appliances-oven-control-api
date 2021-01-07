@@ -1,12 +1,12 @@
 package com.electric.appliances.oven.models;
 
+import com.electric.appliances.oven.exceptions.OvenNotStartedException;
 import com.electric.appliances.oven.utils.OvenState;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.context.annotation.Primary;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
-import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 public class Oven {
 
@@ -19,9 +19,9 @@ public class Oven {
     private String name;
     private String model;
     private String version;
-    @Enumerated(EnumType.STRING)
-    @Column(name= "OVENSTATE")
-    private OvenState ovenState;
+    @Embedded
+    private Program program;
+
     public long getId() {
         return id;
     }
@@ -54,20 +54,13 @@ public class Oven {
         this.version = version;
     }
 
-    public OvenState getOvenState() {
-        return ovenState;
+    public Program getProgram() {
+        return program;
     }
 
-    public void setOvenState(OvenState ovenState) {
-        this.ovenState = ovenState;
+    public void setProgram(Program program) {
+        this.program = program;
     }
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "oven", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<Program> program;
-
-
 
     @Override
     public String toString() {
@@ -80,5 +73,32 @@ public class Oven {
                 '}';
     }
 
+  public void stop(){
+
+        this.program.setOvenState(OvenState.STOPPED);
+        this.program.setTemperature(0L);
+  }
+  public void idle(long temperature){
+        if(this.program.getOvenState().equals(OvenState.STOPPED))
+        {
+            throw new OvenNotStartedException("Oven is not started, please start the oven");
+        }
+        this.program.setTemperature(temperature);
+        this.program.setOvenState(OvenState.IDLE);
+  }
+
+  public void cook(long temperature){
+      if(this.program.getOvenState().equals(OvenState.STOPPED))
+      {
+          throw new OvenNotStartedException("Oven is not started, please start the oven");
+      }
+      this.program.setTemperature(temperature);
+      this.program.setOvenState(OvenState.COOKING);
+    }
+
+   public void start(long temperature){
+        this.program.setTemperature(temperature);
+        this.program.setOvenState(OvenState.STARTED);
+   }
 
 }
