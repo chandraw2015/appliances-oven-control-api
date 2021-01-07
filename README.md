@@ -37,8 +37,22 @@ ServerName, Username and Password are provided in application.properties file.
 
 * Run Below Curl Commands
 
-1.  To start the oven: curl --location --request GET 'http://localhost:8080/api/start/oven'
-2.  To get all Oven Programs: curl --location --request GET 'http://localhost:8080/api/oven/1/programs'
-3.  To get Current State of Oven : curl --location --request GET 'http://localhost:8080/api/state/oven/1'
-4.  To set a Oven Program : curl --location --request GET 'http://localhost:8080/api/oven/1/program/2'
-5.  To Stop the Oven : curl --location --request GET 'http://localhost:8080/api/stop/oven/1'
+1.  To Onboard a oven: curl --location --request POST 'http://localhost:8080/api/oven/onboard' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+    "name":"BestOven",
+    "model":"T-7658",
+    "version":"TE-9289"
+
+}'
+
+2.  To get all Oven : curl --location --request GET 'http://localhost:8080/api/ovens'
+
+3.  To get Oven With Oven Id : curl --location --request GET 'http://localhost:8080/api/oven/1'
+
+4.  To set a Oven Program : curl --location --request PUT 'http://localhost:8080/api/oven/1/program' \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+    "ovenState": "COOKING",
+    "temperature": 500
+    }'

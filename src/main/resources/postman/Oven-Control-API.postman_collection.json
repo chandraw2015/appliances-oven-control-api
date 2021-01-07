@@ -7,24 +7,51 @@
 	},
 	"item": [
 		{
-			"name": "Start-Oven",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				},
-				"description": "To start the Oven if not already."
-			},
-			"response": []
-		},
-		{
-			"name": "GetAll-Programs-WithOvenID",
+			"name": "Onboard-oven",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "c0a614ac-508b-46a4-aa04-8cd542bf9681",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"ovenId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"BestOven\",\r\n\"model\":\"T-7658\",\r\n\"version\":\"TE-9189\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Oven_Base_Url}}/oven/onboard",
+					"host": [
+						"{{Oven_Base_Url}}"
+					],
+					"path": [
+						"oven",
+						"onboard"
+					]
+				},
+				"description": "Get the state of Oven"
+			},
+			"response": []
+		},
+		{
+			"name": "Get-oven-WithOvenID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);\r",
 							"postman.setEnvironmentVariable(\"programId\", jsonData.programs[1].id);"
@@ -37,55 +64,58 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{Oven_Base_Url}}/oven/{{ovenId}}/programs",
+					"raw": "{{Oven_Base_Url}}/oven/2",
 					"host": [
 						"{{Oven_Base_Url}}"
 					],
 					"path": [
 						"oven",
-						"{{ovenId}}",
-						"programs"
+						"2"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get-Oven-CurrentState",
+			"name": "Get-allovens",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
 					"raw": ""
 				},
-				"description": "Get the state of Oven"
+				"description": "To start the Oven if not already."
 			},
 			"response": []
 		},
 		{
 			"name": "Program-Oven",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"ovenState\": \"STOPPED\",\r\n        \"temperature\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": ""
+					"raw": "{{Oven_Base_Url}}/oven/{{ovenId}}/program",
+					"host": [
+						"{{Oven_Base_Url}}"
+					],
+					"path": [
+						"oven",
+						"{{ovenId}}",
+						"program"
+					]
 				},
 				"description": "This Api is used to set a Oven Program"
 			},
 			"response": []
-		},
-		{
-			"name": "Stop-Oven",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				},
-				"description": "This Api is used to Stop the Oven"
-			},
-			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
