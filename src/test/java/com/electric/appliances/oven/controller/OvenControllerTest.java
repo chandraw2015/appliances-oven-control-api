@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.electric.appliances.oven.exceptions.OvenAlreadyExistException;
 import com.electric.appliances.oven.exceptions.OvenNotFoundException;
+import com.electric.appliances.oven.exceptions.OvenNotStartedException;
 import com.electric.appliances.oven.models.Oven;
 import com.electric.appliances.oven.models.OvenDto;
 import com.electric.appliances.oven.models.Program;
@@ -100,7 +101,7 @@ public class OvenControllerTest {
         Mockito.when(this.ovenService.onBoard(ArgumentMatchers.any())).thenReturn(oven);
         this.mockMvc.perform(post("/api/oven/onboard")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(convertObjectToJsonBytes(ovenDto)))
+                .content(convertObjectToJsonString(ovenDto)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -117,7 +118,7 @@ public class OvenControllerTest {
         ovenDto.setVersion("TN-101");
         this.mockMvc.perform(post("/api/oven/onboard")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(convertObjectToJsonBytes(ovenDto)))
+                .content(convertObjectToJsonString(ovenDto)))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.timestamp").isNotEmpty())
                 .andExpect(jsonPath("$.message").value("Oven with provided Model and Version already exists"));
@@ -133,12 +134,27 @@ public class OvenControllerTest {
         Mockito.when(this.ovenService.setOvenProgram(ArgumentMatchers.anyLong(), ArgumentMatchers.any())).thenReturn(oven);
         this.mockMvc.perform(put("/api/oven/1/program")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(convertObjectToJsonBytes(program)))
+                .content(convertObjectToJsonString(program)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("test-oven"))
                 .andExpect(jsonPath("$.program.ovenState").value("STARTED"));
+    }
+    
+    @Test
+    public void test_wrongProgrammedOven() throws  Exception{
+        Program program = new Program();
+        program.setOvenState(OvenState.STARTED);
+        program.setTemperature(0L);
+        Mockito.when(ovenService.setOvenProgram(ArgumentMatchers.anyLong(), ArgumentMatchers.any())).thenThrow(new OvenNotStartedException("Oven is not started. Please start the oven"));
+        this.mockMvc.perform(put("/api/oven/1/program")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(convertObjectToJsonString(program)))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.timestamp").isNotEmpty())
+                .andExpect(jsonPath("$.message").value("Oven is not started. Please start the oven"));
+
     }
 
 
@@ -156,7 +172,7 @@ public class OvenControllerTest {
         return oven;
     }
 
-    public static String convertObjectToJsonBytes(Object object) throws Exception {
+    public static String convertObjectToJsonString(Object object) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.writeValueAsString(object);

@@ -1,4 +1,4 @@
-# appliances-oven-control-api
+# oven-control-api
 
 This codebase was created to demonstrate basic function controls of an Oven.
 
@@ -36,6 +36,8 @@ ServerName, Username and Password are provided in application.properties file.
   OR
 
 * Run Below Curl Commands
+
+You need to onboard an Oven using below curl 1 for testing all endpoint 
 
 1.  To Onboard a oven: curl --location --request POST 'http://localhost:8080/api/oven/onboard' \
     --header 'Content-Type: application/json' \
