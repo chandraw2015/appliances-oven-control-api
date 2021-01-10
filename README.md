@@ -58,3 +58,6 @@ You need to onboard an Oven using below curl 1 for testing all endpoint
     "ovenState": "COOKING",
     "temperature": 500
     }'
+
+#Swagger-UI Api Documentation
+Swagger UI can be accessed after running application locally on http://localhost:8080/swagger-ui/index.html

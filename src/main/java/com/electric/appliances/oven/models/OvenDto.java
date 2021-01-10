@@ -1,11 +1,13 @@
 package com.electric.appliances.oven.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModel;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@ApiModel(description ="Oven basic details")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OvenDto implements Serializable {
     private static final long serialVersionUID = 11568845755587889L;

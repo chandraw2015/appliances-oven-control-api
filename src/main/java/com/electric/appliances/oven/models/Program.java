@@ -1,6 +1,7 @@
 package com.electric.appliances.oven.models;
 
 import com.electric.appliances.oven.utils.OvenState;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 
+@ApiModel(description = "Details of an oven program")
 @Embeddable
 public class Program {
 
