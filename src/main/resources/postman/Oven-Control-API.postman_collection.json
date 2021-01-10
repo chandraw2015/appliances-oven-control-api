@@ -89,13 +89,13 @@
 			"response": []
 		},
 		{
-			"name": "Program-Oven",
+			"name": "Program-Oven-Start",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n       \"ovenState\": \"STOPPED\",\r\n        \"temperature\": 500\r\n}",
+					"raw": "{\r\n       \"ovenState\": \"STARTED\",\r\n        \"temperature\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -114,6 +114,34 @@
 					]
 				},
 				"description": "This Api is used to set a Oven Program"
+			},
+			"response": []
+		},
+		{
+			"name": "Program-Oven-Cooking",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"ovenState\": \"COOKING\",\r\n        \"temperature\": 550\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Oven_Base_Url}}/oven/{{ovenId}}/program",
+					"host": [
+						"{{Oven_Base_Url}}"
+					],
+					"path": [
+						"oven",
+						"{{ovenId}}",
+						"program"
+					]
+				}
 			},
 			"response": []
 		}

@@ -6,8 +6,11 @@ import com.electric.appliances.oven.models.Program;
 import com.electric.appliances.oven.services.Impl.OvenServiceImpl;
 import com.electric.appliances.oven.services.OvenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -43,8 +46,9 @@ public class OvenController {
      return this.ovenService.getOvenById(ovenId);
     }
 
-    @PostMapping(OVEN_ONBOARD_API)
-    public Oven onBoardOven(@RequestBody OvenDto ovenDto){
+    @PostMapping(path =OVEN_ONBOARD_API, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public Oven onBoardOven(@RequestBody @Valid OvenDto ovenDto){
 
        return this.ovenService.onBoard(ovenDto);
 
@@ -52,7 +56,7 @@ public class OvenController {
 
 
      @PutMapping(OVEN_PROGRAM_SET_API)
-     public Oven setOvenProgram(@PathVariable long ovenId , @RequestBody Program program){
+     public Oven setOvenProgram(@PathVariable long ovenId , @RequestBody @Valid Program program){
 
       return this.ovenService.setOvenProgram(ovenId , program);
      }

@@ -5,7 +5,7 @@ import com.electric.appliances.oven.models.Oven;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @Repository
@@ -15,7 +15,6 @@ public interface OvenRepository extends CrudRepository<Oven, Long> {
 
     Optional<Oven> findOvenByVersionAndAndModel(String version , String Model);
 
-    Oven save(Oven oven);
 
 
 }

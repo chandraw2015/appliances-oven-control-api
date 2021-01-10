@@ -29,7 +29,7 @@ public class OvenServiceImpl implements OvenService {
     @Override
     public List<Oven> getOvens(){
 
-       return (List)this.ovenRepository.findAll();
+       return (List<Oven>)this.ovenRepository.findAll();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class OvenServiceImpl implements OvenService {
            default:
                throw new InvalidOvenStateException("Invalid Oven state ,Please provide a valid state.");
        }
-       return this.ovenRepository.save(oven);
-
+        this.ovenRepository.save(oven);
+       return oven;
     }
 }

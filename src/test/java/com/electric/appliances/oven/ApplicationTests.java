@@ -13,10 +13,7 @@ class ApplicationTests {
 
     @Autowired
     OvenController ovenController;
-	@Test
-	void contextLoads() {
 
-        Assertions.assertNotNull(ovenController ,"Oven Controller bean is not null");
-	}
+
 
 }

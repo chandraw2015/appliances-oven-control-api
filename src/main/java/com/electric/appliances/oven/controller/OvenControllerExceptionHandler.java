@@ -30,7 +30,7 @@ public class OvenControllerExceptionHandler extends ResponseEntityExceptionHandl
     public final ResponseEntity<ApiError> handleOvenAlreadyExistException(OvenAlreadyExistException ex, WebRequest request) {
         ApiError apiError = new ApiError(new Date(), ex.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(apiError, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(OvenNotFoundException.class)
