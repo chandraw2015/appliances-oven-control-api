@@ -1,5 +1,7 @@
 package com.electric.appliances.oven.controller;
 
+
+
 import com.electric.appliances.oven.models.ApiError;
 import com.electric.appliances.oven.exceptions.OvenNotFoundException;
 import com.electric.appliances.oven.exceptions.OvenNotStartedException;
@@ -14,6 +16,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.Date;
 
+/*
+  A centralized exception handler for all endpoints configured.
+ */
 @ControllerAdvice
 @RestController
 public class OvenControllerExceptionHandler extends ResponseEntityExceptionHandler {

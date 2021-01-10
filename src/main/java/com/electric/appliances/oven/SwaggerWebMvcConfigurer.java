@@ -1,4 +1,7 @@
 package com.electric.appliances.oven;
+/**
+ * It is a webMvc configurer for Swagger UI. Latest Version of Swagger does not Load UI Automatically.
+ */
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

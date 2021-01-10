@@ -37,22 +37,21 @@ ServerName, Username and Password are provided in application.properties file.
 
 * Run Below Curl Commands
 
-You need to onboard an Oven using below curl 1 for testing all endpoint 
+You need to onboard an Oven using below curl 1 for testing all endpoints
 
-1.  To Onboard a oven: curl --location --request POST 'http://localhost:8080/api/oven/onboard' \
+1.  To Onboard an oven: curl --location --request POST 'http://localhost:8080/api/oven/onboard' \
     --header 'Content-Type: application/json' \
     --data-raw '{
     "name":"BestOven",
     "model":"T-7658",
     "version":"TE-9289"
-
 }'
 
 2.  To get all Oven : curl --location --request GET 'http://localhost:8080/api/ovens'
 
 3.  To get Oven With Oven Id : curl --location --request GET 'http://localhost:8080/api/oven/1'
 
-4.  To set a Oven Program : curl --location --request PUT 'http://localhost:8080/api/oven/1/program' \
+4.  To set an Oven Program : curl --location --request PUT 'http://localhost:8080/api/oven/1/program' \
      --header 'Content-Type: application/json' \
      --data-raw '{
     "ovenState": "COOKING",
@@ -60,4 +59,5 @@ You need to onboard an Oven using below curl 1 for testing all endpoint
     }'
 
 #Swagger-UI Api Documentation
+
 Swagger UI can be accessed after running application locally on http://localhost:8080/swagger-ui/index.html
