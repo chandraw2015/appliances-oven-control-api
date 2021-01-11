@@ -57,7 +57,7 @@ public class OvenControllerExceptionHandler extends ResponseEntityExceptionHandl
     
     @Override
     public final ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
-        ApiError errorDetails = new ApiError(new Date(), "Validation Failed", ex.getBindingResult().toString());
+        ApiError errorDetails = new ApiError(new Date(), "Validation Failed", ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }
