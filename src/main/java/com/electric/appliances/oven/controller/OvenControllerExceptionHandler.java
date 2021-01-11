@@ -6,8 +6,10 @@ import com.electric.appliances.oven.models.ApiError;
 import com.electric.appliances.oven.exceptions.OvenNotFoundException;
 import com.electric.appliances.oven.exceptions.OvenNotStartedException;
 import com.electric.appliances.oven.exceptions.OvenAlreadyExistException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +53,11 @@ public class OvenControllerExceptionHandler extends ResponseEntityExceptionHandl
     public final ResponseEntity<ApiError> handleAllExceptions(Exception ex, WebRequest request) {
         ApiError errorDetails = new ApiError(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<ApiError>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    @Override
+    public final ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+        ApiError errorDetails = new ApiError(new Date(), "Validation Failed", ex.getBindingResult().toString());
+        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }
