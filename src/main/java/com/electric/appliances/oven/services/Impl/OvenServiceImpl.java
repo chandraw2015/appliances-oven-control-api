@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of functions to control an connected oven. All business logic is handled here.
+ * @author Chandra Rawat
+ */
 @Service
 public class OvenServiceImpl implements OvenService {
 
@@ -35,7 +39,7 @@ public class OvenServiceImpl implements OvenService {
     @Override
     public Oven onBoard(OvenDto ovenDto){
 
-        Optional<Oven> oven = this.ovenRepository.findOvenByVersionAndAndModel(ovenDto.getVersion() , ovenDto.getModel());
+        Optional<Oven> oven = this.ovenRepository.findOvenByVersionAndModel(ovenDto.getVersion() , ovenDto.getModel());
          oven.ifPresent((o)->{
              throw new OvenAlreadyExistException("Oven with provided Model and Version Already Exists.");
          });
@@ -49,6 +53,7 @@ public class OvenServiceImpl implements OvenService {
        return this.ovenRepository.findById(id).orElseThrow(()-> new OvenNotFoundException("The oven with provided id does not exist"));
 
     }
+
 
 
     @Override

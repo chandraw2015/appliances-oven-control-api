@@ -62,9 +62,9 @@ public class OvenServiceTest {
     public void test_getOven_NotFound() {
 
         Mockito.when(ovenRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
-        assertThatExceptionOfType(OvenNotFoundException.class).isThrownBy(() -> {
-            ovenService.getOvenById(1L);
-        });
+        assertThatExceptionOfType(OvenNotFoundException.class).isThrownBy(() ->
+                ovenService.getOvenById(1L)
+        );
 
     }
 
@@ -77,7 +77,7 @@ public class OvenServiceTest {
         ovenDto.setName("test-oven");
         ovenDto.setModel("TN");
         ovenDto.setVersion("TN-101");
-        ;
+
         assertThat(ovenService.onBoard(ovenDto).getId()).isEqualTo(ovenOriginal.getId());
     }
 
@@ -85,7 +85,7 @@ public class OvenServiceTest {
     public void test_oven_alreadyExist() {
 
         Oven oven = buildOven("TN", "TN-101");
-        Mockito.when(ovenRepository.findOvenByVersionAndAndModel(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(Optional.of(oven));
+        Mockito.when(ovenRepository.findOvenByVersionAndModel(ArgumentMatchers.anyString(), ArgumentMatchers.anyString())).thenReturn(Optional.of(oven));
         OvenDto ovenDto = new OvenDto();
         ovenDto.setName("test-oven");
         ovenDto.setModel("TN");
@@ -153,9 +153,9 @@ public class OvenServiceTest {
         Program program = new Program();
         program.setTemperature(450L);
         program.setOvenState(OvenState.COOKING);
-        assertThatExceptionOfType(OvenNotStartedException.class).isThrownBy(() -> {
-            ovenService.setOvenProgram(1L, program);
-        });
+        assertThatExceptionOfType(OvenNotStartedException.class).isThrownBy(() ->
+                ovenService.setOvenProgram(1L, program)
+        );
 
     }
 

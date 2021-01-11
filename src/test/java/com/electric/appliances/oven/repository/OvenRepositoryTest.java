@@ -72,7 +72,7 @@ public class OvenRepositoryTest {
         testEntityManager.persist(buildOven("TN", "TN-101"));
         testEntityManager.persist(buildOven("TN", "TN-201"));
         testEntityManager.flush();
-        Optional<Oven> oven = ovenRepository.findOvenByVersionAndAndModel("TN-201", "TN");
+        Optional<Oven> oven = ovenRepository.findOvenByVersionAndModel("TN-201", "TN");
         assertThat(oven.get().getVersion()).isEqualTo("TN-201");
         assertThat(oven.get().getModel()).isEqualTo("TN");
     }
@@ -82,7 +82,7 @@ public class OvenRepositoryTest {
         testEntityManager.persist(buildOven("TN", "TN-101"));
         testEntityManager.persist(buildOven("TN", "TN-201"));
         testEntityManager.flush();
-        Optional<Oven> oven = ovenRepository.findOvenByVersionAndAndModel("TN-301", "TN");
+        Optional<Oven> oven = ovenRepository.findOvenByVersionAndModel("TN-301", "TN");
         assertThat(oven.isPresent()).isEqualTo(false);
     }
 

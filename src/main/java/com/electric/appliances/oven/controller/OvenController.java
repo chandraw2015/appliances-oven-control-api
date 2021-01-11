@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * This class works as a front Controller for Application.
+ * It only exposes the endpoints to client.
+ * @author Chandra Rawat
+ */
 
 @RestController
 @RequestMapping("api")
@@ -54,7 +59,7 @@ public class OvenController {
     @ApiOperation(value = "To onboard a new oven", response = Oven.class)
     @PostMapping(path =OVEN_ONBOARD_API, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public Oven onBoardOven(@RequestBody @Valid OvenDto ovenDto){
+    public Oven onBoardOven(@Valid @RequestBody OvenDto ovenDto){
 
        return this.ovenService.onBoard(ovenDto);
 

@@ -16,8 +16,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.Date;
 
-/*
-  A centralized exception handler for all endpoints configured.
+/**
+ * A centralized exception handler controller for all endpoints configured.
+ * @author Chandra rawat
  */
 @ControllerAdvice
 @RestController
@@ -45,4 +46,10 @@ public class OvenControllerExceptionHandler extends ResponseEntityExceptionHandl
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 
+
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<ApiError> handleAllExceptions(Exception ex, WebRequest request) {
+        ApiError errorDetails = new ApiError(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<ApiError>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

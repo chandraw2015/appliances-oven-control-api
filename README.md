@@ -54,10 +54,17 @@ You need to onboard an Oven using below curl 1 for testing all endpoints
 4.  To set an Oven Program : curl --location --request PUT 'http://localhost:8080/api/oven/1/program' \
      --header 'Content-Type: application/json' \
      --data-raw '{
-    "ovenState": "COOKING",
+    "ovenState": "STARTED",
     "temperature": 500
     }'
 
-#Swagger-UI Api Documentation
+# Swagger-UI Api Documentation
 
 Swagger UI can be accessed after running application locally on http://localhost:8080/swagger-ui/index.html
+ 
+# How an Oven can be programmed
+
+1. Lifecycle of an oven STOPPED->STARTED->COOKING->IDLE
+2. Oven can not directly be set to COOKING or IDLE state you need to START it otherwise it will throw OvenNotStarted Exception.
+3. Oven can be programmed to STOPPED state at any point of time.
+4. If Oven is in IDLE State it can be set to COOKING or STOPPED state.
